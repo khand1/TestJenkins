@@ -19,6 +19,8 @@ pipeline {
                 sh "docker container rm ${DOCKER_IMAGE}"
                 sh "docker run -p 7124:80 --name ${DOCKER_IMAGE} -d ${DOCKER_IMAGE}:latest"
                 sh "docker rmi \$(docker images '${DOCKER_IMAGE}' -f 'before=${DOCKER_IMAGE}' -q)"
+                sh "docker image prune -a"
+                sh "y"
             }
         }
     }
