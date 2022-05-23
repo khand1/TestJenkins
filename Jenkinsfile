@@ -18,7 +18,7 @@ pipeline {
                 sh "docker container stop ${DOCKER_IMAGE}"
                 sh "docker container rm ${DOCKER_IMAGE}"
                 sh "docker run -p 7124:80 --name ${DOCKER_IMAGE} -d ${DOCKER_IMAGE}:latest"
-                sh "docker rmi $(docker images 'testjenkins' -f \"before=testjenkins\" -q)"
+                sh "docker rmi \$(docker images 'testjenkins' -f 'before=testjenkins' -q)"
             }
         }
     }
