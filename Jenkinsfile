@@ -15,7 +15,9 @@ pipeline {
                 sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
                 sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
                 sh "docker image ls | grep ${DOCKER_IMAGE}"
-                sh "docker run -p 7124:80 ${DOCKER_IMAGE}:latest"
+                sh "docker container stop ${DOCKER_IMAGE}"
+                sh "docker container rm ${DOCKER_IMAGE}"
+                sh "docker run -p 7124:80 --name ${DOCKER_IMAGE} -d ${DOCKER_IMAGE}:latest"
             }
         }
     }
