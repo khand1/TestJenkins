@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'linux'}
+    agent none
 
     environment {
         DOCKER_IMAGE = "testjenkins"
@@ -7,6 +7,7 @@ pipeline {
 
     stages {
         stage("build"){
+            agent { node {label 'Built-In Node'}}
             environment {
                 DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"
             }
